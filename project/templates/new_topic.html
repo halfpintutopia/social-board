@@ -13,22 +13,10 @@
 {% block content %}
     <form action="" method="post" novalidate>
         {% csrf_token %}
-        {#        Render all fields just by typing:#}
-        {#        {{ form.as_p }}#}
-        {% for field in form %}
-            <div class="form-group">
-                {{ field.label_tag }}
-
-                {#                Load django-widget-tweaks then use render_field#}
-                {% render_field field class="form-control" %}
-
-                {% if field.help_text %}
-                    <small class="form-text text-muted">
-                        {{ field.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-        {% endfor %}
+        {# Render all fields just by typing: #}
+        {# {{ form.as_p }} #}
+        {# includes HTML templates in another template #}
+        {% include 'includes/form.html' %}
         <button class="btn btn-success" type="submit">Post</button>
     </form>
 {% endblock %}
