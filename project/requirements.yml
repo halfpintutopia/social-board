@@ -1,0 +1,6 @@
+name: project
+dependencies:
+  - python03.6
+  pip:
+    - django==2.0.7
+    - django-widget-tweaks==1.4.2
