@@ -11,6 +11,9 @@ class Board(models.Model):
         max_length=100
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Topic(models.Model):
     subject = models.CharField(
