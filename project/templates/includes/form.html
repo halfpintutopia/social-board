@@ -19,7 +19,8 @@
         {% endif %}
         {% if field.help_text %}
             <small class="form-text text-muted">
-                {{ field.help_text }}
+                {# By default Django treats all strings as unsafe, escaping all special characters - in this case we trust it. #}
+                {{ field.help_text|safe }}
             </small>
         {% endif %}
     </div>
