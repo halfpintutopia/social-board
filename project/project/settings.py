@@ -121,3 +121,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Pass the name of the URL pattern we want to redirect the user after log out
+LOGOUT_REDIRECT_URL = 'home'
