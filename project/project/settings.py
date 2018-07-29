@@ -124,3 +124,4 @@ STATICFILES_DIRS = [
 
 # Pass the name of the URL pattern we want to redirect the user after log out
 LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
