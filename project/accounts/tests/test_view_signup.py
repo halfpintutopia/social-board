@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from accounts.views import signup
-from .forms import SignUpForm
+from accounts.forms import SignUpForm
 
 
 class SignUpTests(TestCase):
