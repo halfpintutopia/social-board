@@ -13,9 +13,6 @@
 {% block content %}
     <form action="" method="post" novalidate>
         {% csrf_token %}
-        {# Render all fields just by typing: #}
-        {# {{ form.as_p }} #}
-        {# includes HTML templates in another template #}
         {% include 'includes/form.html' %}
         <button class="btn btn-success" type="submit">Post</button>
     </form>

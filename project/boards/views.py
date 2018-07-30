@@ -1,5 +1,6 @@
 # from django.http import HttpResponse
 # from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -33,6 +34,7 @@ def board_topics(request, pk):
     return render(request, 'topics.html', {'board': board})
 
 
+@login_required
 def new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
     # TODO: get the currently logged in user
