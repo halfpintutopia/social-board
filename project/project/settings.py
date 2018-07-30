@@ -125,3 +125,7 @@ STATICFILES_DIRS = [
 # Pass the name of the URL pattern we want to redirect the user after log out
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+
+# Instead of sending emails we log them, simply display them in the console.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
