@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 
-from boards.forms import NewTopicForm
+from boards.forms import NewTopicForm, PostForm
 from boards.models import Board, Post, Topic
 
 
@@ -53,8 +53,9 @@ def new_topic(request, pk):
                 topic=topic,
                 created_by=request.user
             )
-            # TODO: redirect to the created topic page
-            return redirect('board_topics', pk=board.pk)
+            # Redirect to the created topic page
+            # IMPORTANT: using topic.pk because a `topic` is an object (Topic Model Instance) and assessing the pk property of the Topic model instance.
+            return redirect('topic_posts', pk=pk, topic_pk=topic.pk)
 
     else:
         form = NewTopicForm()
@@ -65,3 +66,21 @@ def topic_posts(request, pk, topic_pk):
     # board__pk
     topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
     return render(request, 'topic_posts.html', {'topic': topic})
+
+
+# A new view protected by @login_required
+@login_required
+def reply_topic(request, pk, topic_pk):
+    topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.topic = topic
+            post.created_by = request.user
+            post.save()
+            # IMPORTANT: using topic_pk as referring to the keyword argument of the function.
+            return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
+    else:
+        form = PostForm()
+    return render(request, 'reply_topic.html', {'topic': topic, 'form': form})
